@@ -1,0 +1,20 @@
+{
+  "name": "whatwg-url-ngssr",
+  "version": "1.0.0",
+  "description": "New mongodb drivers  with Angular v18 gives error because package called whatwg-url so this is modified one and working i hope no security issues because its a simple change from the original one",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "(https://github.com/shady-ahmed-bdr/whatwg-url-ngssr)"
+  },
+  "keywords": [
+    "angular",
+    "mongodb",
+    "whatwg-url"
+  ],
+  "author": "shady-ahmed-bdr (not me!)",
+  "license": "ISC"
+}
