@@ -31,7 +31,24 @@ const implSymbol = Symbol("impl");
 const sameObjectCaches = Symbol("SameObject caches");
 const ctorRegistrySymbol = Symbol.for("[webidl2js] constructor registry");
 
-const AsyncIteratorPrototype = Object.getPrototypeOf(Object.getPrototypeOf(async function* () {}).prototype);
+//const AsyncIteratorPrototype = Object.getPrototypeOf(Object.getPrototypeOf(async function* () {}).prototype);
+let AsyncIteratorPrototype;
+
+try {
+    // Check if async generator functions are supported
+    const asyncGenFunction = async function* () {};
+    // Verify that the async generator function has a prototype
+    if (asyncGenFunction.prototype) {
+        // Access AsyncIteratorPrototype
+        AsyncIteratorPrototype = Object.getPrototypeOf(Object.getPrototypeOf(asyncGenFunction.prototype));
+    } else {
+        throw new Error('Async generators are not supported in this environment.');
+    }
+} catch (error) {
+    console.error('Failed to assign AsyncIteratorPrototype:', error);
+    // Provide a fallback or handle the error as needed
+    AsyncIteratorPrototype = null; // Assigning null as a fallback
+}
 
 function initCtorRegistry(globalObject) {
   if (hasOwn(globalObject, ctorRegistrySymbol)) {
