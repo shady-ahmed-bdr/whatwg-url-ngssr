@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "New mongodb drivers  with Angular v18 gives error because package called whatwg-url so this is modified one and working i hope no security issues because its a simple change from the original one",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "(https://github.com/shady-ahmed-bdr/whatwg-url-ngssr)"
@@ -15,6 +12,49 @@
     "mongodb",
     "whatwg-url"
   ],
-  "author": "shady-ahmed-bdr (not me!)",
-  "license": "ISC"
+  "files": [
+    "index.js",
+    "webidl2js-wrapper.js",
+    "lib/*.js"
+  ],
+  "author": "Sebastian Mayr <github@smayr.name>",
+  "license": "MIT",
+  "dependencies": {
+    "tr46": "^5.0.0",
+    "webidl-conversions": "^7.0.0"
+  },
+  "devDependencies": {
+    "@domenic/eslint-config": "^3.0.0",
+    "benchmark": "^2.1.4",
+    "c8": "^8.0.1",
+    "domexception": "^4.0.0",
+    "esbuild": "^0.19.5",
+    "eslint": "^8.53.0",
+    "webidl2js": "^17.1.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "coverage": "c8 node --test --experimental-test-coverage test/*.js",
+    "lint": "eslint .",
+    "prepare": "node scripts/transform.js",
+    "pretest": "node scripts/get-latest-platform-tests.js && node scripts/transform.js",
+    "build-live-viewer": "esbuild --bundle --format=esm --sourcemap --outfile=live-viewer/whatwg-url.mjs index.js",
+    "test": "node --test test/*.js"
+  },
+  "c8": {
+    "reporter": [
+      "text",
+      "html"
+    ],
+    "exclude": [
+      "lib/Function.js",
+      "lib/URL.js",
+      "lib/URLSearchParams.js",
+      "lib/utils.js",
+      "scripts/",
+      "test/"
+    ]
+  }
 }
